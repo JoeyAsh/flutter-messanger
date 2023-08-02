@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "459894940156",
+    "project_id": "fluttermessenger-fa674",
+    "storage_bucket": "fluttermessenger-fa674.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459894940156:android:e7e9530c3abe98d1bb9279",
+        "android_client_info": {
+          "package_name": "com.flutter_messanger.flutter_messanger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "459894940156-m591rr1bau3nsnbqcl1neb1p25n4uurq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtoqXMeGfS1Gu0wkufWXa8tTc2vxoExI4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "459894940156-m591rr1bau3nsnbqcl1neb1p25n4uurq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

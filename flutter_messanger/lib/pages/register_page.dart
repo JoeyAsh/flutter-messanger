@@ -4,26 +4,35 @@ import 'package:flutter_messanger/components/fm_text_field.dart';
 import 'package:flutter_messanger/services/auth/auth_service.dart';
 import 'package:provider/provider.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final void Function()? onTap;
-  
-  const LoginPage({super.key, required this.onTap});
+
+  const RegisterPage({super.key, required this.onTap});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
-  void signIn() async {
+  void signUp() async {
+    if (passwordController.text != confirmPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Passwords do not match.")));
+      return;
+    }
+
     final authService = Provider.of<AuthService>(context, listen: false);
 
     try {
-      authService.signInWithEmailAndPassword(emailController.text, passwordController.text);
-    } catch(e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+      await authService.signUpWithEmailAndPassword(
+          emailController.text, passwordController.text);
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 
@@ -45,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 24),
               const Text(
-                "Welcome back!",
+                "Let's create an account for you!",
                 style: TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 24),
@@ -58,17 +67,22 @@ class _LoginPageState extends State<LoginPage> {
                   controller: passwordController,
                   hintText: 'Password',
                   obscureText: true),
+              const SizedBox(height: 8),
+              FMTextField(
+                  controller: confirmPasswordController,
+                  hintText: 'Confirm password',
+                  obscureText: true),
               const SizedBox(height: 24),
-              Button(onTap: signIn, text: 'Sign In'),
+              Button(onTap: signUp, text: 'Sign Up'),
               const SizedBox(height: 48),
-                  Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Not a member? '),
+                  const Text('Already a member? '),
                   GestureDetector(
                     onTap: widget.onTap,
                     child: const Text(
-                      'Register now',
+                      'Login now',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   )
